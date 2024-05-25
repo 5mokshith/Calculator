@@ -1,6 +1,7 @@
 # Calculator
 
-This a calculator inspired by color OS 
+This a calculator inspired by color OS calculator design
+
 ![Screenshot (474)](https://github.com/5mokshith/Calculator/assets/143961455/65eb8450-6c45-4f11-932a-37c21bd397b4)
 
 This incoperates media queries for smaller devices 
