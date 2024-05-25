@@ -40,13 +40,29 @@ function addToScreen(event){
     }
 }
 
-function runCalculate(inputSymbol){
+function runCalculate(inputSymbol) {
     mainDisplay.classList.remove('error');
-    mainDisplay.textContent = mainDisplay.textContent === "Enter correct expression" ? '' + inputSymbol : mainDisplay.textContent+= inputSymbol; 
+
+    if (mainDisplay.textContent === "Enter correct expression") {
+        mainDisplay.textContent = '' + inputSymbol;
+    } else {
+        mainDisplay.textContent += inputSymbol;
+    }
+
     mainDisplay.classList.remove('output');
     mainDisplay.classList.add('input');
-    runningDisplay.textContent = (mainDisplay.textContent === '')? 'none' : eval(mainDisplay.textContent);
+
+    let expression = mainDisplay.textContent;
+    expression = expression.replace(/×/g, '*').replace(/÷/g, '/');
+
+    try {
+        runningDisplay.textContent = expression === '' ? 'none' : eval(expression);
+    } catch (e) {
+        runningDisplay.textContent = runningDisplay.textContent
+    }
 }
+
+
 
 function backSpace(){
     let words = mainDisplay.textContent;
@@ -60,6 +76,9 @@ function backSpace(){
     }
     if(mainDisplay.textContent.length === 0){
         runningDisplay.textContent = '';
+    }
+    if(words === 'invaild expression!'){
+        mainDisplay.textContent = '';
     }
 }
 
@@ -77,7 +96,9 @@ function clearScreen(){
 
 function calculate(){
     try {
-        mainDisplay.textContent = eval(mainDisplay.textContent);
+        let expression = mainDisplay.textContent;
+        expression = expression.replace(/×/g, '*').replace(/÷/g, '/');
+        mainDisplay.textContent = eval(expression);
         mainDisplay.classList.add('output');
         mainDisplay.classList.remove('input');
         runningDisplay.textContent = '';
